@@ -11,7 +11,7 @@ class MuseServer(ServerThread):
     #listen for messages on port 5000
     def __init__(self, out_q):
         ServerThread.__init__(self, 5020)
-        self.feedback_calculator = NeuroFeedback(30, out_q)
+        self.feedback_calculator = NeuroFeedback(20, 30, out_q)
 
     ## Below updates computed bandpowers for each frequency range
     @make_method('/muse/acc', 'fff')
@@ -49,6 +49,7 @@ class MuseServer(ServerThread):
 
     @make_method('/muse/elements/jaw_clench', 'i')
     def eeg_callback(self, path, args):
+        print 'jaw_clench'
         self.feedback_calculator.async_update('jaw_clench')
 
     @make_method('/muse/elements/blink', 'i')
