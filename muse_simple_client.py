@@ -1,10 +1,11 @@
 from queue import Queue
 from threading import Thread
-from muse_server import MuseServer
+from listening_server import MuseServer
 import time, websocket, json
 from functools import partial
 import socket
 
+# A sample listening client, could be anything on the network you want to talk to 
 
 def muse_listener_producer(out_q):
    server = MuseServer(out_q)

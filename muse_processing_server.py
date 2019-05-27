@@ -1,6 +1,6 @@
 from queue import Queue
 from threading import Thread
-from muse_server import MuseServer
+from listening_server import MuseServer
 import time, websocket, json
 from functools import partial
 import socket

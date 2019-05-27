@@ -1,0 +1,1 @@
+A simple script to compute neurofeedback metrics based on an OSC server connection. To run, first establish a session using [Muselab](http://developer.choosemuse.com/tools/mac-tools/muselab) or an [OSC server](http://developer.choosemuse.com/research-tools-example/grabbing-data-from-museio-a-few-simple-examples-of-muse-osc-servers), then run `listening_server.py`. 

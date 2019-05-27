@@ -26,14 +26,13 @@ class NeuroFeedback(object):
 
     def abs_frequency_update(self, spectrum, value):
 
-
         self.abs_spectrum_powers[spectrum][self.buffer_spectrum_ixs[spectrum]] = value 
         self.buffer_spectrum_ixs[spectrum] += 1
 
         # Time lock to alpha frequency update
         if self.buffer_spectrum_ixs['alpha'] == self.bufferWindowSize:
             
-            # Take magnitudes for power updates
+            # Take magnitudes for motion updates
             self.abs_spectrum_powers['gyro_xyz'] = np.sqrt( \
                 np.power(self.abs_spectrum_powers['gyro_x'],2) + \
                 np.power(self.abs_spectrum_powers['gyro_y'],2) + \
@@ -61,24 +60,8 @@ class NeuroFeedback(object):
                 self.rolling_min_max_ixs[key] = newix
                 
             update = self.standardize_updates(update)
-            # Need to find min and max for normalization
-
-            # if not self.update_min:
-            #     self.update_min = Counter(update)
-
-            # for key in update.keys():
-
-            #     if update[key] < self.update_min[key]:
-            #         self.update_min[key] = update[key]
-            #     elif update[key] > self.update_max[key]:
-            #         self.update_max[key] = update[key]
-            
-            # print self.update_min
-            # print self.update_max
 
             self.out_q.put(update)
-
-
 
     def compute_power_updates(self):
         '''Take average over the cached buffer'''
@@ -107,5 +90,5 @@ class NeuroFeedback(object):
         elif updatetype == 'blink':
             update = {'blink' : 'true'}
         
-        # self.out_q.put(update)
+        self.out_q.put(update)
 
